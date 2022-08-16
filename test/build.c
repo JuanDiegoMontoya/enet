@@ -1,7 +1,7 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 
 #define ENET_IMPLEMENTATION
-#include "enet.h"
+#include "enet/enet.h"
 #include <stdio.h>
 
 typedef struct {
