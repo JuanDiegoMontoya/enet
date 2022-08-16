@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
 project(enet C)
 
+option(ENET_STATIC ON)
+option(ENET_SHARED OFF)
+option(ENET_TEST OFF)
+
 # configure projects
 if (ENET_STATIC)
     add_library(enet_static STATIC test/library.c)
