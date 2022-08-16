@@ -1,3 +1,6 @@
+// From: https://github.com/zpl-c/enet/tree/9da697bf8a2d869c55f90681e6376fa3b85813c8
+// Search for "Jaker" to find changes that were made to the original
+
 /**
  * include/enet.h - a Single-Header auto-generated variant of enet.h library.
  *
@@ -64,11 +67,58 @@
 // =======================================================================//
 
 #if defined(_WIN32)
+    // Jaker: added all these to minimize Windows.h leakage
+    #define NOMINMAX
+    #define WIN32_LEAN_AND_MEAN
+    #define NOGDICAPMASKS
+    #define NOCRYPT
+    #define NOVIRTUALKEYCODES
+    #define NOWINMESSAGES
+    #define NOWINSTYLES
+    #define NOSYSMETRICS
+    #define NOMENUS
+    #define NOICONS
+    #define NOKEYSTATES
+    #define NORASTEROPS
+    #define NOSYSCOMMANDS
+    #define NOSHOWWINDOW
+    #define OEMRESOURCE
+    #define NOATOM
+    #define NOCLIPBOARD
+    #define NOCOLOR
+    #define NOCTLMGR
+    #define NODRAWTEXT
+    #define NOGDI
+    #define NOKERNEL
+    #define NOUSER
+    #define NONLS
+    #define NOMB
+    #define NOMEMMGR
+    #define NOMETAFILE
+    #define NOMSG
+    #define NOOPENFILE
+    #define NOSCROLL
+    #define NOSERVICE
+    #define NOSOUND
+    #define NOTEXTMETRIC
+    #define NOWH
+    #define NOWINOFFSETS
+    #define NOCOMM
+    #define NOKANJI
+    #define NOHELP
+    #define NOPROFILER
+    #define NODEFERWINDOWPOS
+    #define NOMCX
     #if defined(_MSC_VER) && defined(ENET_IMPLEMENTATION)
         #pragma warning (disable: 4267) // size_t to int conversion
         #pragma warning (disable: 4244) // 64bit to 32bit int
         #pragma warning (disable: 4018) // signed/unsigned mismatch
         #pragma warning (disable: 4146) // unary minus operator applied to unsigned type
+        // Jaker: disabled some additional msvc warnings
+        #pragma warning (disable: 5054) // operator| deprecated between enumerations of different types
+        #pragma warning (disable: 4245) // conversion between signed and unsigned types
+        #pragma warning (disable: 4701) // potentially uninitialized local variable used
+        #define _WINSOCK_DEPRECATED_NO_WARNINGS
     #endif
 
     #ifndef ENET_NO_PRAGMA_LINK
