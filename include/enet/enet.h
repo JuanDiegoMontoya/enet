@@ -591,7 +591,7 @@ extern "C" {
         ENET_PACKET_FLAG_SENT                = (1 << 8), /** whether the packet has been sent from all queues it has been entered into */
     } ENetPacketFlag;
 
-    typedef void (ENET_CALLBACK *ENetPacketFreeCallback)(void *);
+    typedef void (ENET_CALLBACK *ENetPacketFreeCallback)(ENetPacket *);
 
     /**
      * ENet packet structure.
@@ -1030,7 +1030,7 @@ extern "C" {
 
     ENET_API void *      enet_packet_get_data(ENetPacket *);
     ENET_API enet_uint32 enet_packet_get_length(ENetPacket *);
-    ENET_API void        enet_packet_set_free_callback(ENetPacket *, void *);
+    ENET_API void        enet_packet_set_free_callback(ENetPacket *, ENetPacketFreeCallback);
 
     ENET_API ENetPacket * enet_packet_create_offset(const void *, size_t, size_t, enet_uint32);
     ENET_API enet_uint32  enet_crc32(const ENetBuffer *, size_t);
@@ -3578,8 +3578,8 @@ extern "C" {
         return packet->dataLength;
     }
 
-    void enet_packet_set_free_callback(ENetPacket *packet, void *callback) {
-        packet->freeCallback = (ENetPacketFreeCallback)callback;
+    void enet_packet_set_free_callback(ENetPacket *packet, ENetPacketFreeCallback callback) {
+        packet->freeCallback = callback;
     }
 
     /** Queues a packet to be sent.
