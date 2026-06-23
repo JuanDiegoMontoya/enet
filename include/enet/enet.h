@@ -68,7 +68,9 @@
 
 #if defined(_WIN32)
     // Jaker: added all these to minimize Windows.h leakage
+  #ifndef NOMINMAX
     #define NOMINMAX
+  #endif
     #define WIN32_LEAN_AND_MEAN
     #define NOGDICAPMASKS
     #define NOCRYPT
@@ -4948,7 +4950,7 @@ extern "C" {
 // !
 // =======================================================================//
 
-    #ifdef _WIN32
+    #if defined(_WIN32) && !defined(__GNUC__)
         static LARGE_INTEGER getFILETIMEoffset() {
             SYSTEMTIME s;
             FILETIME f;
